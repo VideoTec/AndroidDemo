@@ -1,0 +1,3 @@
+[submodule "AndroidCommon"]
+	path = Common
+	url = git@github.com:VideoTec/AndroidCommonLib.git
