@@ -2,6 +2,7 @@ package work.wangxiang.localvideo.view;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import work.wangxiang.localvideo.LocalVideoPresenter;
 
 public class VideoListFragment extends RxMvpFragment<LocalVideoModel, LocalVideoPresenter>
         implements LocalVideoContract.View {
+    private final static String TAG = "VideoListFragment";
     private VideoListAdapter videoListAdapter;
 
     @Override
@@ -31,7 +33,11 @@ public class VideoListFragment extends RxMvpFragment<LocalVideoModel, LocalVideo
     protected void initView(View rootView) {
         RecyclerView videoRecyclerView = rootView.findViewById(R.id.rv_video_list);
         videoRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-        videoListAdapter = new VideoListAdapter(getActivity());
+        videoListAdapter = new VideoListAdapter(getActivity(), v -> {
+            int pos = videoRecyclerView.getChildAdapterPosition(v);
+            LocalVideoBean video = videoListAdapter.getItem(pos);
+            Log.i(TAG, "点击了视频 " + video.getPath());
+        });
         videoRecyclerView.setAdapter(videoListAdapter);
     }
 

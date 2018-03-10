@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -21,9 +22,11 @@ import work.wangxiang.localvideo.LocalVideoBean;
 public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.VideoItem> {
     private Context context;
     private List<LocalVideoBean> videoSet;
+    private View.OnClickListener onItemClickListener;
 
-    public VideoListAdapter(Context context) {
+    VideoListAdapter(Context context, View.OnClickListener l) {
         this.context = context;
+        this.onItemClickListener = l;
     }
 
     public void setData(List<LocalVideoBean> videos) {
@@ -47,20 +50,25 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Vide
         return videoSet == null ? 0 : videoSet.size();
     }
 
+    LocalVideoBean getItem(int position) {
+        return videoSet.get(position);
+    }
+
     class VideoItem extends RecyclerView.ViewHolder {
         private ImageView ivThumb;
 
-        public VideoItem(LayoutInflater inflater, ViewGroup parent) {
+        VideoItem(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_local_video, parent, false));
             ivThumb = itemView.findViewById(R.id.iv_thumb);
         }
 
-        public void bind(LocalVideoBean video) {
+        void bind(LocalVideoBean video) {
             GlideApp.with(context)
                     .load(video.getPath())
                     .placeholder(R.mipmap.ic_launcher)
                     .error(R.mipmap.ic_launcher_round)
                     .into(ivThumb);
+            itemView.setOnClickListener(VideoListAdapter.this.onItemClickListener);
         }
     }
 }
