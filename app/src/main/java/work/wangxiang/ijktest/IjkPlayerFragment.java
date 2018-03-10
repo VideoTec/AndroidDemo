@@ -1,5 +1,6 @@
 package work.wangxiang.ijktest;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 import work.wangxiang.androiddemo.R;
+import work.wangxiang.utils.Const;
 
 /**
  * IjkPlayerFragment
@@ -24,7 +26,6 @@ import work.wangxiang.androiddemo.R;
 
 public class IjkPlayerFragment extends Fragment {
     private final static String TAG = "IjkPlayerFragment";
-    public final static String EXTRA_VIDEO_PATH = "extra_video_path";
 
     private SurfaceView surfaceView;
     private String videoPath;
@@ -35,7 +36,7 @@ public class IjkPlayerFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         if (args != null) {
-            videoPath = args.getString(EXTRA_VIDEO_PATH);
+            videoPath = args.getString(Const.EXTRA_VIDEO_PATH);
         }
     }
 
@@ -86,12 +87,12 @@ public class IjkPlayerFragment extends Fragment {
             ijkPlayer.setDataSource(videoPath);
             ijkPlayer.setSurface(surfaceView.getHolder().getSurface());
             ijkPlayer.prepareAsync();
-            ijkPlayer.setOnPreparedListener(new IMediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(IMediaPlayer iMediaPlayer) {
-                    iMediaPlayer.start();
-                }
-            });
+            ijkPlayer.setOnPreparedListener(IMediaPlayer::start);
+//            ijkPlayer.setOnCompletionListener((IMediaPlayer player) -> {
+//                if (getActivity() != null) {
+//                    getActivity().finish();
+//                }
+//            });
         } catch (IOException e) {
             Log.e(TAG, "播放异常", e);
         }
