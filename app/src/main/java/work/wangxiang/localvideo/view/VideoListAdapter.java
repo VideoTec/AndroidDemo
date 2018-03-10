@@ -68,7 +68,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.Vide
                     .placeholder(R.mipmap.ic_launcher)
                     .error(R.mipmap.ic_launcher_round)
                     .into(ivThumb);
-            itemView.setOnClickListener(VideoListAdapter.this.onItemClickListener);
+            itemView.setOnClickListener(onItemClickListener);
         }
     }
 }

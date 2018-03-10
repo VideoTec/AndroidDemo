@@ -9,6 +9,7 @@ import java.util.List;
 
 import work.wangxiang.android.rxmvp.RxMvpFragment;
 import work.wangxiang.androiddemo.R;
+import work.wangxiang.ijktest.IjkPlayerActivity;
 import work.wangxiang.localvideo.LocalVideoBean;
 import work.wangxiang.localvideo.LocalVideoContract;
 import work.wangxiang.localvideo.LocalVideoModel;
@@ -37,6 +38,8 @@ public class VideoListFragment extends RxMvpFragment<LocalVideoModel, LocalVideo
             int pos = videoRecyclerView.getChildAdapterPosition(v);
             LocalVideoBean video = videoListAdapter.getItem(pos);
             Log.i(TAG, "点击了视频 " + video.getPath());
+            IjkPlayerActivity.startIjkPlayerActivity(
+                    VideoListFragment.this.getActivity(), video.getPath());
         });
         videoRecyclerView.setAdapter(videoListAdapter);
     }
