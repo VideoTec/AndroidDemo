@@ -1,5 +1,6 @@
 package work.wangxiang.androiddemo;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import work.wangxiang.android.common.Utils;
 import work.wangxiang.localvideo.view.VideoListActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //        .setAction("Action", null).show();
-                startActivity(new Intent(MainActivity.this, VideoListActivity.class));
+                if (Utils.simpleRequestPermission(MainActivity.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    startActivity(new Intent(MainActivity.this, VideoListActivity.class));
+                }
             }
         });
     }
