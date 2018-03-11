@@ -8,4 +8,7 @@
     <string name="delete_line">删除当前行</string>
     <string name="start_play">开始播放</string>
     <string name="stop_play">停止播放</string>
+    <string name="live_tv_name">电视台名称</string>
+    <string name="live_tv_uri">电视台直播地址</string>
+    <string name="load_live_tv_list">加载电视直播列表</string>
 </resources>

@@ -26,6 +26,7 @@
         <activity android:name="work.wangxiang.localvideo.view.VideoListActivity" />
         <activity android:name="work.wangxiang.test.recyclerview.ActivityFragmentTest" />
         <activity android:name="work.wangxiang.ijktest.IjkPlayerActivity" />
+        <activity android:name="work.wangxiang.livetv.view.LiveTvActivity" />
     </application>
 
 </manifest>
