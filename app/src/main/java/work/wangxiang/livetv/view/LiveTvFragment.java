@@ -1,6 +1,5 @@
 package work.wangxiang.livetv.view;
 
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,7 +11,7 @@ import work.wangxiang.androiddemo.R;
 import work.wangxiang.ijktest.IjkPlayerActivity;
 import work.wangxiang.livetv.LiveTvBean;
 import work.wangxiang.livetv.LiveTvContract;
-import work.wangxiang.livetv.LiveTvModel;
+import work.wangxiang.livetv.model.LiveTvModel;
 import work.wangxiang.livetv.LiveTvPresenter;
 
 /**

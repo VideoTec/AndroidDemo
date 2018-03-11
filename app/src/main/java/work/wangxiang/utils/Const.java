@@ -7,4 +7,5 @@ package work.wangxiang.utils;
 
 public class Const {
     public final static String EXTRA_VIDEO_PATH = "work.wangxiang.utils.extra_video_path";
+    public final static String WORK_BASE_URL = "http://www.wangxiang.work";
 }
