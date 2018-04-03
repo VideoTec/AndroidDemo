@@ -12,6 +12,11 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    
+    <style name="VideoListTheme" parent="AppTheme">
+        <item name="android:windowEnterTransition">@transition/slide</item>
+        <item name="android:windowReturnTransition">@transition/explode</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLoadLocalVideo(View view) {
-        startActivity(new Intent(this, VideoListActivity.class));
+        VideoListActivity.openVideoList(this);
     }
 
     public void onRecyclerViewTest(View view) {

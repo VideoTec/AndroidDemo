@@ -23,7 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="work.wangxiang.localvideo.view.VideoListActivity" />
+        <activity
+            android:name="work.wangxiang.localvideo.view.VideoListActivity"
+            android:theme="@style/VideoListTheme"/>
         <activity android:name="work.wangxiang.test.recyclerview.ActivityFragmentTest" />
         <activity android:name="work.wangxiang.ijktest.IjkPlayerActivity" />
         <activity android:name="work.wangxiang.livetv.view.LiveTvActivity" />
