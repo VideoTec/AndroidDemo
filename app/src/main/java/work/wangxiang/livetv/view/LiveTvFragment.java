@@ -1,5 +1,6 @@
 package work.wangxiang.livetv.view;
 
+import android.databinding.ViewDataBinding;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,7 +21,7 @@ import work.wangxiang.livetv.LiveTvPresenter;
  */
 
 public class LiveTvFragment extends RxMvpFragment<LiveTvModel, LiveTvPresenter>
-        implements LiveTvContract.View{
+        implements LiveTvContract.View {
     private LiveTvAdapter liveTvAdapter;
 
     @Override
@@ -34,7 +35,7 @@ public class LiveTvFragment extends RxMvpFragment<LiveTvModel, LiveTvPresenter>
     }
 
     @Override
-    protected void initView(View rootView) {
+    protected void initView(View rootView, ViewDataBinding binding) {
         RecyclerView rvLiveTv = rootView.findViewById(R.id.rv_live_tv_list);
         rvLiveTv.setLayoutManager(new LinearLayoutManager(getActivity()));
         liveTvAdapter = new LiveTvAdapter(getActivity(), v -> {

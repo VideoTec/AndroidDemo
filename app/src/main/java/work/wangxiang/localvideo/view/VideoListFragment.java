@@ -1,5 +1,6 @@
 package work.wangxiang.localvideo.view;
 
+import android.databinding.ViewDataBinding;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,7 +32,7 @@ public class VideoListFragment extends RxMvpFragment<LocalVideoModel, LocalVideo
     }
 
     @Override
-    protected void initView(View rootView) {
+    protected void initView(View rootView, ViewDataBinding binding) {
         RecyclerView videoRecyclerView = rootView.findViewById(R.id.rv_video_list);
         videoRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         videoListAdapter = new VideoListAdapter(getActivity(), v -> {
