@@ -16,6 +16,7 @@
     <style name="VideoListTheme" parent="AppTheme">
         <item name="android:windowEnterTransition">@transition/slide</item>
         <item name="android:windowReturnTransition">@transition/explode</item>
+        <item name="android:windowEn"
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
