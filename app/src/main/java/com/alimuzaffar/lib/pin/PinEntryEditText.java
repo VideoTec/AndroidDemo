@@ -34,6 +34,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -42,12 +43,14 @@ import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.view.inputmethod.InputMethodManager;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 import work.wangxiang.androiddemo.R;
 
 public class PinEntryEditText extends android.support.v7.widget.AppCompatEditText {
     private static final String XML_NAMESPACE_ANDROID = "http://schemas.android.com/apk/res/android";
+    private final static String TAG = "PinEntryEditText";
 
     protected String mMask = null;
     protected StringBuilder mMaskChars = null;
@@ -156,6 +159,10 @@ public class PinEntryEditText extends android.support.v7.widget.AppCompatEditTex
         mLinesPaint = new Paint(getPaint());
         mLinesPaint.setStrokeWidth(mLineStroke);
 
+        mCharPaint.setTextAlign(Paint.Align.CENTER);
+        mLastCharPaint.setTextAlign(Paint.Align.CENTER);
+        mSingleCharPaint.setTextAlign(Paint.Align.CENTER);
+
         TypedValue outValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorControlActivated,
                 outValue, true);
@@ -191,22 +198,16 @@ public class PinEntryEditText extends android.support.v7.widget.AppCompatEditTex
             }
         });
         // When tapped, move cursor to end of text.
-        super.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setSelection(getText().length());
-                if (mClickListener != null) {
-                    mClickListener.onClick(v);
-                }
+        super.setOnClickListener(v -> {
+            setSelection(getText().length());
+            if (mClickListener != null) {
+                mClickListener.onClick(v);
             }
         });
 
-        super.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                setSelection(getText().length());
-                return true;
-            }
+        super.setOnLongClickListener(v -> {
+            setSelection(getText().length());
+            return true;
         });
 
         //If input type is password and no mask is set, use a default mask
@@ -221,7 +222,7 @@ public class PinEntryEditText extends android.support.v7.widget.AppCompatEditTex
         }
 
         //Height of the characters, used if there is a background drawable
-        getPaint().getTextBounds("|", 0, 1, mTextHeight);
+        getPaint().getTextBounds("9", 0, 1, mTextHeight);
 
         mAnimate = mAnimatedType > -1;
     }
@@ -270,7 +271,7 @@ public class PinEntryEditText extends android.support.v7.widget.AppCompatEditTex
             } else {
                 startX += rtlFlag * (mCharSize + mSpace);
             }
-            mCharBottom[i] = mLineCoords[i].bottom - mTextBottomPadding;
+            mCharBottom[i] = mLineCoords[i].bottom / 2 - (mTextHeight.bottom + mTextHeight.top) / 2;
         }
     }
 
@@ -289,17 +290,7 @@ public class PinEntryEditText extends android.support.v7.widget.AppCompatEditTex
         //super.onDraw(canvas);
         CharSequence text = getFullText();
         int textLength = text.length();
-        float[] textWidths = new float[textLength];
-        getPaint().getTextWidths(text, 0, textLength, textWidths);
 
-        float hintWidth = 0;
-        if (mSingleCharHint != null) {
-            float[] hintWidths = new float[mSingleCharHint.length()];
-            getPaint().getTextWidths(mSingleCharHint, hintWidths);
-            for (float i : hintWidths) {
-                hintWidth += i;
-            }
-        }
         for (int i = 0; i < mNumChars; i++) {
             //If a background for the pin characters is specified, it should be behind the characters.
             if (mPinBackground != null) {
@@ -310,12 +301,12 @@ public class PinEntryEditText extends android.support.v7.widget.AppCompatEditTex
             float middle = mLineCoords[i].left + mCharSize / 2;
             if (textLength > i) {
                 if (!mAnimate || i != textLength - 1) {
-                    canvas.drawText(text, i, i + 1, middle - textWidths[i] / 2, mCharBottom[i], mCharPaint);
+                    canvas.drawText(text, i, i + 1, middle, mCharBottom[i], mCharPaint);
                 } else {
-                    canvas.drawText(text, i, i + 1, middle - textWidths[i] / 2, mCharBottom[i], mLastCharPaint);
+                    canvas.drawText(text, i, i + 1, middle, mCharBottom[i], mLastCharPaint);
                 }
             } else if (mSingleCharHint != null) {
-                canvas.drawText(mSingleCharHint, middle - hintWidth / 2, mCharBottom[i], mSingleCharPaint);
+                canvas.drawText(mSingleCharHint, middle, mCharBottom[i], mSingleCharPaint);
             }
             //The lines should be in front of the text (because that's how I want it).
             if (mPinBackground == null) {

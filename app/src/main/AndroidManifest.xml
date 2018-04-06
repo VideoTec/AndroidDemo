@@ -29,6 +29,10 @@
         <activity android:name="work.wangxiang.test.recyclerview.ActivityFragmentTest" />
         <activity android:name="work.wangxiang.ijktest.IjkPlayerActivity" />
         <activity android:name="work.wangxiang.livetv.view.LiveTvActivity" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
