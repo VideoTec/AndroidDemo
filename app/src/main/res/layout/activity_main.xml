@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context="work.wangxiang.androiddemo.MainActivity">
 
+    <Button
+        android:id="@+id/btn_recyclerview_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="32dp"
+        android:onClick="onRecyclerViewTest"
+        android:text="@string/recycler_view_test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.alimuzaffar.lib.pin.PinEntryEditText
         android:id="@+id/pinEntryEditText"
         android:layout_width="288dp"
@@ -27,16 +38,19 @@
         app:pinTextBottomPadding="0dp"
         tools:text="f1" />
 
-    <Button
-        android:id="@+id/btn_recyclerview_test"
+    <EditText
+        android:id="@+id/editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="32dp"
-        android:onClick="onRecyclerViewTest"
-        android:text="@string/recycler_view_test"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_recyclerview_test" >
+        <requestFocus />
+    </EditText>
 
     <Button
         android:id="@+id/btn_load_local_video_list"
